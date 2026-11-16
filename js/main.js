@@ -166,6 +166,23 @@
     render();
   });
 
+  /* ---------- Barre du haut : masquée en descendant, réaffichée en remontant (topbar-hide) ---------- */
+  var topbar = document.querySelector(".topbar");
+  if (topbar) {
+    var lastY = window.scrollY;
+    function updateBar() {
+      var y = window.scrollY, dy = y - lastY;
+      var menuOpen = document.body.classList.contains("menu-open");
+      if (menuOpen || y < 80) { topbar.classList.remove("is-hidden"); }
+      else if (dy > 6) { topbar.classList.add("is-hidden"); }
+      else if (dy < -6) { topbar.classList.remove("is-hidden"); }
+      if (Math.abs(dy) > 6 || y < 80) lastY = y;
+    }
+    window.addEventListener("scroll", updateBar, { passive: true });
+    // au clavier, la barre réapparaît dès qu'un de ses liens reçoit le focus
+    topbar.addEventListener("focusin", function () { topbar.classList.remove("is-hidden"); });
+  }
+
   /* ---------- Menu burger ---------- */
   var burger = document.querySelector(".burger");
   var menu = document.getElementById("menu");

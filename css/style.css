@@ -66,7 +66,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1; }
 
 .kicker {
   display: inline-block;
-  font-size: 13px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700;
+  font-size: 13px; letter-spacing: 4px; text-transform: uppercase; font-weight: 500;
   margin-bottom: 22px;
 }
 .section--b .kicker { color: var(--bordeaux); }
@@ -125,7 +125,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1; }
 .cover h1 { font-size: clamp(64px, 12vw, 176px); font-weight: 900; line-height: .86; letter-spacing: -.03em; }
 .cover h1 span { display: block; }
 .cover .role { font-size: clamp(22px, 2.6vw, 34px); font-weight: 300; font-style: italic; margin: 26px 0 8px; }
-.cover .meta { font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; opacity: .85; }
+.cover .meta { font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: .85; }
 .cover-photos { position: relative; height: min(76vh, 640px); }
 .cover-photos .pola { position: absolute; }
 .cover-photos .pola:nth-child(1) { left: 0; top: 8%; width: 58%; transform: rotate(-5deg); }
@@ -583,3 +583,41 @@ a.project:focus-visible { outline: 3px solid var(--bordeaux); outline-offset: 6p
 .js .reveal { transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
 .js .reveal.is-in { transform: none; }
 .reveal.d1, .reveal.d2, .reveal.d3, .reveal.d4 { transition-delay: 0s; }
+
+/* Logo dans la barre du haut */
+.topbar a.brand { display: grid; place-items: center; width: 56px; height: 56px; padding: 0; border-radius: 50%; }
+.topbar a.brand img { display: block; height: 44px; width: auto; }
+
+/* Logo à la place du nom en couverture */
+.cover h1.cover-logo { line-height: 0; margin: 6px 0 4px; }
+.cover-logo img { display: block; width: min(100%, 780px); height: auto; }
+
+/* =========================================================
+   Barre de navigation horizontale
+   Ordinateur et tablette : liens visibles, burger masqué
+   Téléphone (< 700 px) : menu burger comme avant
+   ========================================================= */
+.navbar { display: none; }
+@media (min-width: 700px) {
+  html { scroll-padding-top: 84px; }
+  .topbar {
+    pointer-events: auto; padding-top: 10px; padding-bottom: 10px;
+    background: rgba(89, 0, 0, .94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    box-shadow: 0 1px 0 rgba(255,255,255,.12);
+  }
+  .topbar .burger { display: none; }
+  .navbar { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); }
+  .topbar .navbar a {
+    background: none; box-shadow: none; border-radius: 0;
+    color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+    padding: 8px 0; border-bottom: 1.5px solid transparent; transition: border-color .25s, opacity .25s; opacity: .85;
+  }
+  .topbar .navbar a:hover, .topbar .navbar a:focus-visible { opacity: 1; border-bottom-color: rgba(255,255,255,.7); outline: none; }
+  .topbar .navbar a[aria-current="page"] { opacity: 1; border-bottom-color: #fff; }
+  .topbar a.brand { box-shadow: none; }
+}
+
+/* Barre du haut : disparaît en descendant, revient en remontant */
+.topbar { transition: transform .35s var(--ease); will-change: transform; }
+.topbar.is-hidden { transform: translateY(-110%); }
+@media (prefers-reduced-motion: reduce) { .topbar { transition: none; } }

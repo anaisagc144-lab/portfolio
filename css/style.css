@@ -621,3 +621,9 @@ a.project:focus-visible { outline: 3px solid var(--bordeaux); outline-offset: 6p
 .topbar { transition: transform .35s var(--ease); will-change: transform; }
 .topbar.is-hidden { transform: translateY(-110%); }
 @media (prefers-reduced-motion: reduce) { .topbar { transition: none; } }
+
+/* Pourquoi un Master : trois raisons */
+.reasons { list-style: none; padding: 0; margin: 24px 0 0; }
+.reasons li { padding: 16px 0; border-top: 1px solid rgba(255,255,255,.3); font-size: 16px; line-height: 1.6; color: var(--rose); }
+.reasons li:last-child { border-bottom: 1px solid rgba(255,255,255,.3); }
+.reasons b { display: block; color: #fff; font-size: 18px; margin-bottom: 4px; }
